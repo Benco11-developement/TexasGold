@@ -2,6 +2,8 @@
 {7,6→dim([A]
 Remplir(0,[A]
 
+0→⌊P4D(1)
+
 EnrBDG 0
 
 AxesNAff
@@ -36,8 +38,9 @@ A+1.5*θ→K
 K*P-4→N
 ent(Q*(Ymax-H-11→O
 
+If 1<dim(⌊P4D):Then:If ⌊P4D(2)=1
 Goto A
-
+End
 "EPAISSEUR EN + (HORS GRID)
 1→R
 
@@ -70,7 +73,7 @@ For(I,0,6
 Texte(­1,O,ent(X),"")
 X+3M→X
 End
-
+1→⌊P4D(2)
 EnrPic Pic9
 
 Lbl A

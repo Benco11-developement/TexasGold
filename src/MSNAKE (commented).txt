@@ -1,5 +1,4 @@
-Désarchiver ⌊SNAKE
-Désarchiver L₅
+ÉditeurConfig ⌊SNAKE,L₅
 EnrBDG 0
 ⌊SNAKE→L₅
 "DIR.
@@ -277,6 +276,7 @@ L₅→⌊SNAKE
 Archiver ⌊SNAKE
 Archiver L₅
 RappelBDG 0
+ÉditeurConfig L₁,L₂,L₃,L₄,L₆
 Stop
 
 Lbl J
