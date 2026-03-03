@@ -1,0 +1,329 @@
+"INIT BOARD
+{7,6→dim([A]
+Remplir(0,[A]
+
+EnrBDG 0
+
+AxesNAff
+CoordNAff
+FoncNAff 
+GraphNAff 
+EffDess
+
+100→Xmax
+93→Ymax
+0→Ymin
+0→Xmin
+
+"POINT REF. BOARD (G,D,HAUTEUR
+0.08*Xmax→A
+0.92*Xmax→B
+0.78*Ymax→H
+
+"GRID EN Y(Z) EN X(θ)
+H/12→Z
+(B-A)/21→θ
+
+"K CENTRE PION EN X
+A+1.5*θ→K
+
+"P,Q RES / DIM JEU
+264/Xmax→P
+164/Ymax→Q
+
+"M GRID(X) RES ABSOLU, N POS(X) FLECHE  ALIGNE AVEC PION
+θ*P→M
+K*P-4→N
+ent(Q*(Ymax-H-11→O
+
+Goto A
+
+"EPAISSEUR EN + (HORS GRID)
+1→R
+
+"DRAW BOARD
+For(I,0,H+R
+Ligne(A-R,I,B+R,I,NOIR
+End
+
+"C COLONNE PION
+0→C
+Z→Y
+"DRAW PIONS
+For(I,0,41
+"CERCLE (R=1.75) OPTI
+Z-1.75→R
+K+3Cθ→X
+For(F,0,R,X
+√(R²-F²
+Ligne(X+F,Y+Rep,X+F,Y-Rep,0
+Ligne(X-F,Y+Rep,X-F,Y-Rep,0
+End
+(C≠6)(C+1→C
+Y+2*Z*(C=0→Y
+End
+
+"FLECHES
+CouleurTexte(BLANC
+N→X
+For(I,0,6
+Texte(­1,O,ent(X),"")
+X+3M→X
+End
+
+EnrPic Pic9
+
+Lbl A
+RappelPic Pic9
+
+CouleurTexte(ROUGE
+Texte(1,ent(P*43),"ROUGE
+
+0→G
+4→J
+0→T
+
+suite(I,I,0,6→L₁
+
+42→dim(L₂
+Remplir(0,L₂
+dim(L₁→E
+
+0→W
+
+While Enon(G
+VERTT+ROUGEnon(T→D
+CouleurTexte(Rep
+L₁(J→C
+Texte(­1,O,ent(N+3CM),""
+If T:Then:Texte(1,ent(P*43),"  VERT  "
+Else:Texte(1,ent(P*43),"ROUGE
+End
+0→R
+Repeat R=105
+Repeat R
+getKey→R
+End
+CouleurTexte(BLANC
+If R=24:Then:Texte(­1,O,ent(N+3CM),""
+dim(L₁
+1+reste(Rep+J-2,Rep→J
+L₁(J→C
+CouleurTexte(D
+Texte(­1,O,ent(N+3CM),""
+End
+If R=26:Then:Texte(­1,O,ent(N+3CM),""
+1+reste(J,dim(L₁→J
+L₁(J→C
+CouleurTexte(D
+Texte(­1,O,ent(N+3CM),""
+End
+If W(R=45):Then:0→L
+L₂(W→C
+Repeat (L=6)+(0=[A](C,L
+L+1→L
+End
+If [A](C,L):Then:0→F
+C-1→C
+Repeat C<L₁(F
+F+1→F
+End
+
+suite(L₁(I-(I>F))(I≠F)+C(F=I),I,1,dim(L₁)+1→L₁
+CouleurTexte(BLANC
+Texte(­1,O,ent(N+3CM),""
+C+1→C
+J+(J≥F→J
+E+1→E
+Else:L-1→L
+End
+0→[A](C,L
+0→L₂(W
+W-1→W
+
+Z-1.75→R
+K+3(C-1)θ→X
+Z(2L-1→Y
+For(F,0,R,X
+√(R²-F²
+Ligne(X+F,Y+Rep,X+F,Y-Rep,1,BLANC
+Ligne(X-F,Y+Rep,X-F,Y-Rep,1,BLANC
+End
+
+L₁(J→C
+non(T→T
+VERTT+ROUGEnon(T→D
+CouleurTexte(D
+Texte(­1,O,ent(N+3CM),""
+If T:Then:Texte(1,ent(P*43),"  VERT  "
+Else:Texte(1,ent(P*43),"ROUGE
+End
+
+End
+End
+C+1→C
+0→L
+Repeat 0=[A](C,L
+L+1→L
+End
+T-non(T→I
+Rep→[A](C,L
+W+1→W
+C→L₂(W
+Z-1.75→R
+K+3(C-1)θ→X
+Z(2L-1→Y
+If L=6:Then:CouleurTexte(NOIR
+Texte(­1,O,ent(XP-4)," "
+DS<(E,1
+suite(L₁(I+(I≥J)),I,1,dim(L₁)-1→L₁
+(J>dim(L₁
+1Rep+Jnon(Rep→J
+End
+For(F,0,R,X
+√(R²-F²
+Ligne(X+F,Y+Rep,X+F,Y-Rep,1,D
+Ligne(X-F,Y+Rep,X-F,Y-Rep,1,D
+End
+C→X
+L→Y
+0→V
+
+"HORIZONTAL
+I→F
+"VERTICAL
+I→R
+"HAUT G-BAS D
+I→G
+"BAS G-HAUT D
+I→S
+
+IS>(X,7
+I=[A](X,Y→V
+F+VI→F
+
+IS>(X,7
+V+(I=[A](X,Y→V
+ent(V/2→V
+F+VI→F
+IS>(X,7
+V+(I=[A](X,Y→V
+ent(V/2→V
+F+IV→F
+
+C→X
+0→V
+DS<(X,1
+I=[A](X,Y→V
+F+VI→F
+
+DS<(X,1
+V+(I=[A](X,Y→V
+ent(V/2→V
+F+IV→F
+
+DS<(X,1
+V+(I=[A](X,Y→V
+abs(4I)≤abs(F+Ient(V/2→F
+
+C→X
+0→V
+IS>(Y,6
+I=[A](X,Y→V
+R+VI→R
+IS>(Y,6
+V+(I=[A](X,Y→V
+ent(V/2→V
+R+IV→R
+IS>(Y,6
+V+(I=[A](X,Y→V
+ent(V/2→V
+R+IV→R
+
+L→Y
+0→V
+DS<(Y,1
+I=[A](X,Y→V
+R+VI→R
+DS<(Y,1
+V+(I=[A](X,Y→V
+ent(V/2→V
+R+IV→R
+DS<(Y,1
+V+(I=[A](X,Y→V
+abs(4I)≤abs(R+Ient(V/2→R
+
+min(C,7-L→X
+0→V
+DS<(X,1
+I=[A](C-1,L+1→V
+G+VI→G
+DS<(X,1
+V+(I=[A](C-2,L+2→V
+ent(V/2→V
+G+VI→G
+DS<(X,1
+V+(I=[A](C-3,L+3→V
+G+Ient(V/2→G
+
+0→V
+min(8-C,L→X
+
+DS<(X,1
+I=[A](C+1,L-1→V
+G+VI→G
+DS<(X,1
+V+(I=[A](C+2,L-2→V
+ent(V/2→V
+G+VI→G
+DS<(X,1
+V+(I=[A](C+3,L-3→V
+G+Ient(V/2→G
+abs(4I)≤abs(G→G
+
+0→V
+min(C,L→X
+DS<(X,1
+I=[A](C-1,L-1→V
+S+VI→S
+DS<(X,1
+V+(I=[A](C-2,L-2→V
+ent(V/2→V
+S+VI→S
+DS<(X,1
+V+(I=[A](C-3,L-3→V
+S+Ient(V/2→S
+
+0→V
+min(8-C,7-L→X
+DS<(X,1
+I=[A](C+1,L+1→V
+S+VI→S
+DS<(X,1
+V+(I=[A](C+2,L+2→V
+ent(V/2→V
+S+VI→S
+DS<(X,1
+V+(I=[A](C+3,L+3→V
+abs(4I)≤abs(S+Ient(V/2→S
+
+I(F+R+G+S→G
+
+non(T→T
+C-1→C
+End
+CouleurTexte(NOIR
+For(I,1,dim(L₁
+Texte(­1,O,ent(N+3L₁(I)M)," "
+End
+If G<0:Then:CouleurTexte(ROUGE
+Texte(1,ent(P*23),"VICTOIRE DES ROUGES
+Else:If G>0:Then:CouleurTexte(VERT
+Texte(1,ent(P*24),"VICTOIRE DES VERTS
+Else:CouleurTexte(BLEU
+Texte(1,ent(P*37),"MATCH NUL !
+End
+End
+Texte(ent(Ymax-H-4),ent(P*21),"APPUYER POUR QUITTER
+Pause 
+RappelBDG 0

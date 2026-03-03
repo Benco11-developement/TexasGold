@@ -1,0 +1,86 @@
+Lbl A
+"Touche ID→Chn1
+"Resolution→Chn2
+Menu("Outils",Chn1,B,Chn2,C,"CONCEPT 1",G,"Quitter",Z
+
+Lbl Z
+Stop
+
+Lbl B
+0→A
+While A=0:getKey→A
+End
+Disp A
+Pause 
+Goto A
+
+Lbl C
+Menu("X ou Y (LIRE VARIABLE Z APRES CRASH)","X",D,"Y",E,"Retour",A
+Lbl D
+0→A
+Goto F
+Lbl E
+1→A
+Goto F
+
+Lbl F
+EnrBDG 0
+EffDess
+
+AxesNAff
+CoordNAff
+FoncNAff 
+GraphNAff 
+
+DispGraph
+­1→Z
+While 1=1:
+Z+1→θ
+Pxl-Aff(θA+50(non(A)),θ(non(A))+50A,ROUGE)
+Z+1→Z
+End
+
+Lbl G
+EnrBDG 0
+EffDess
+0→Xmin
+264/1.0→Xmax
+0→Ymin
+164/1.0→Ymax
+AxesNAff
+CoordNAff
+FoncNAff 
+GraphNAff 
+DispGraph
+getKey→A
+2→Y
+1→X
+{24/2,14/2→dim([A]
+Remplir(0,[A]
+1→[A](X,Y
+1→D
+9→θ
+{5,5→dim([B]
+Remplir(0,[B]
+[B]→[C]
+While A≠105:
+getKey→A
+A≠26→B
+X+B→Z
+If (B ou D)=1:Then:
+0→D
+For(I,­2,2
+I²→B
+For(J,­2,2
+If [B](I+3,J+3)=1:Pt-NAff(6X+I,07Y+J
+If B+J²≤4:Then:
+Pt-Aff(6Z+I,07Y+J,2,ROUGE
+1→[C](I+3,J+3
+End
+End
+End
+[C]→[B]
+End
+Z→X
+End
+RappelBDG 0

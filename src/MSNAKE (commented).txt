@@ -1,0 +1,415 @@
+Désarchiver ⌊SNAKE
+Désarchiver L₅
+EnrBDG 0
+⌊SNAKE→L₅
+"DIR.
+105→dim(⌊DIR
+1→⌊DIR(26
+2→⌊DIR(34
+3→⌊DIR(24
+4→⌊DIR(25
+
+"STR.CONVERT
+"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ .?→Chn2
+
+"CONF.DEFAULT
+"FENETRE+4*(X+arrondir(Y/Z))+VIT.+PB+L.NOM+NOM
+{0,24,­14,0,­0.6,8,0.6,7,0.5,8/7,­0.5,7/6,0.037,3,1,1}→⌊DEF
+dim(⌊DEF→B
+If dim(L₅)<1+B:Then:⌊DEF→L₅
+"NUM.ACTIF
+augmenter({1},L₅→L₅
+End
+"POS. LEN. NOM
+dim(⌊DEF)-2→C
+"O=CONF. COUNT et L₅(Q)=START CONF. ACTIF
+0→O
+0→Q
+dim(L₅
+For(A,2,Rep,B
+O+1→O
+Rep≠L₅(1
+QRep+Anon(Rep→Q
+A-1+L₅(A+C→A
+End
+"STR.CONST.
+"CONFIGURATIONS→Chn9
+"MODIFIER→Chn7
+"NOM→Chn6
+"ACCUEIL→Chn5
+
+Lbl A
+L₅→⌊SNAKE
+"-→Chn8
+Q+C
+For(A,Rep+1,Rep+L₅(Rep
+Chn8+sousch(Chn2,L₅(A),1→Chn8
+End
+sousch(Chn8,2,­1+longueur(Chn8→Chn8
+Menu("("+versChaîne(L₅(1))+") "+Chn8+" - PB:"+versChaîne(L₅(Q+13)),"JOUER",J,Chn9,B,"RESET",X,"QUITTER",Z
+
+Lbl B
+"θ=INDEX CONF. A MODIF. et Z=PAGE ACT. SELECT
+2→θ
+1→Z
+Menu(Chn9,"NOUVEAU",C,Chn7,F
+
+Lbl C
+O+1→O
+O→X
+augmenter(L₅,⌊DEF→L₅
+Goto D
+
+Lbl O
+Z-1(Z>1→Z
+Goto F
+Lbl N
+Z+1→Z
+
+Lbl F
+"SELECT.
+"A=INDEX CONFIG et Y=NUM.MIN.CONFIG et Chn1=TOUT NOM CONFIG DE PAGE et R=LEN.Chn1
+"L₆=LISTE INDEX DEBUT NOM
+2→A
+6(Z-1→Y
+"?→Chn1
+5→dim(L₆
+dim(L₅→W
+1→R
+
+"E=POS CONF. PAGE
+"T=INDEX LEN. NOM CONFIG
+"CHAQUE CONF+VIDE(reste(6)=0:
+"IN PAGE?=G
+"SI EXIST:
+"SI G:
+"+(NUM-NOM)->Chn1 et +IND.(SAUF 1ER)->L₆
+"End
+"A=NEXT INDEX
+"ELSE:SI G:
+"+*.. et +(R+1..
+For(I,1,Y+6
+I>Y→G
+reste(I-1,6→E
+Rep>0→D
+If A<W:Then:A+C→T
+L₅(T→U
+If G:Then:versChaîne(I→Chn3
+Chn1+Chn3+"-→Chn1
+For(X,T+1,T+U
+Chn1+sousch(Chn2,L₅(X),1→Chn1
+End
+If D:R→L₆(E
+1+U+longueur(Chn3)+R→R
+End
+1+T+U→A
+Else:If G et D:Then:Chn1+"?→Chn1
+R→L₆(E
+R+1→R
+End
+End
+End
+longueur(Chn1→G
+Rep>6→A
+G-A→U
+sousch(Chn1,2A+1non(A),U→Chn1
+L₆(1→G
+L₆(2→H
+L₆(3→I
+L₆(4→J
+L₆(5→K
+"NUM. CONF. SELECTIONNEE
+­1→X
+Menu("SELECTIONNER-PAGE "+versChaîne(Z),sousch(Chn1,1,G-A),G,sousch(Chn1,G,H-G),H,sousch(Chn1,H,I-H),I,sousch(Chn1,I,J-I),K,sousch(Chn1,J,K-J),L,sousch(Chn1,K,R-K),M,"SUIVANT>",N,"<PRECEDENT",O,Chn5,A
+
+Lbl G
+sousch(Chn1,1,G-A→Chn1
+Y→A
+Goto Q
+Lbl H
+sousch(Chn1,G,H-G→Chn1
+Y+1→A
+Goto Q
+Lbl I
+sousch(Chn1,H,I-H→Chn1
+Y+2→A
+Goto Q
+Lbl K
+sousch(Chn1,I,J-I→Chn1
+Y+3→A
+Goto Q
+Lbl L
+sousch(Chn1,J,K-J→Chn1
+Y+4→A
+Goto Q
+Lbl M
+sousch(Chn1,K,R-K→Chn1
+Y+5→A
+Goto Q
+Lbl Q
+A+1→A
+A>0 et A≤O
+ARep+Xnon(Rep→X
+If Rep>0:Goto D
+Goto F
+
+Lbl D
+2→A
+For(I,1,X
+A+C→θ
+1+Rep+L₅(Rep→A
+End
+"("+versChaîne(X)+") →Chn1
+For(A,θ+1,θ+L₅(θ
+Chn1+sousch(Chn2,L₅(A),1→Chn1
+End
+θ-C→θ
+Menu(Chn7+":"+Chn1,Chn6,E,"VITESSE ("+versChaîne(L₅(θ+12))+")",R,"Xmin="+versChaîne(L₅(θ))+"Xmax="+versChaîne(L₅(θ+1))+"Ymin="+versChaîne(L₅(θ+2))+"...",S,"GHDB",T,"UTILISER",U,"SUPPRIMER",V,"RETOUR",F,Chn5,A
+
+Lbl E
+Input Chn6+"=",Chn1
+longueur(Chn1→B
+Rep+1→dim(L₆
+longueur(Chn2→D
+Remplir(Rep,L₆
+B→L₆(1
+For(A,1,D
+sousch(Chn2,A,1→Chn4
+For(M,1,B
+sousch(Chn1,M,1→Chn0
+If Chn4=Chn0:A→L₆(M+1
+End
+End
+θ+C→M
+L₅→⌊T
+M-1→dim(⌊T
+augmenter(⌊T,L₆→⌊T
+L₅(M→B
+M+B+1→A
+dim(L₅
+If Rep>A:Then:suite(L₅(A),A,A,Rep→L₆
+augmenter(⌊T,L₆→⌊T
+End
+⌊T→L₅
+Goto D
+
+Lbl R
+Input "VITESSE (EN S)=",A
+A→L₅(θ+12
+Goto D
+
+Lbl S
+For(I,0,3
+If I=0:"Xmin→Chn1
+If I=1:"Xmax→Chn1
+If I=2:"Ymin→Chn1
+If I=3:"Ymax→Chn1
+Input Chn1+"("+versChaîne(L₅(θ+I))+")=",A
+A→L₅(θ+I
+End
+Goto D
+
+Lbl T
+For(I,4,11
+ent(I/2→A
+If A=2:"G-→Chn1
+If A=3:"H-→Chn1
+If A=4:"D-→Chn1
+If A=5:"B-→Chn1
+If reste(I,2)=0:Then:Chn1+"DECALAGE(→Chn1
+Else:If reste(A,2)=0:Then:Chn1+"Xmax→Chn1
+Else:Chn1+"Ymin→Chn1
+End
+Chn1+"/(→Chn1
+End
+Input Chn1+versChaîne(L₅(θ+I))+")=",A
+A→L₅(θ+I
+End
+Goto D
+
+Lbl U
+X→L₅(1
+θ→Q
+Goto D
+
+Lbl V
+Input "SUR ?(Y)",Chn1
+If Chn1≠"Y":Goto D
+If O=1:Then:Disp "IMPOSSIBLE
+Pause 
+Goto D
+End
+L₅→L₆
+θ-1→dim(L₆
+θ+C
+1+Rep+L₅(Rep→A
+dim(L₅
+If Rep>A:augmenter(L₆,suite(L₅(A),A,A,Rep→L₆
+L₆→L₅
+O-1→O
+If X=L₅(1):Then:1→L₅(1
+2→Q
+End
+Goto F
+
+Lbl X
+Input "SUR ?(YES)",Chn1
+If Chn1≠"YES":Goto A
+{0}→L₅
+
+Lbl Z
+DelVar ⌊DEF
+DelVar ⌊T
+DelVar Chn9
+DelVar ⌊DIR
+DelVar Chn2
+DelVar Chn0
+DelVar Chn4
+DelVar Chn3
+DelVar Chn8
+DelVar Chn7
+DelVar Chn6
+DelVar Chn1
+DelVar Chn5
+DelVar [A]
+{0}→L₆
+L₅→⌊SNAKE
+Archiver ⌊SNAKE
+Archiver L₅
+RappelBDG 0
+Stop
+
+Lbl J
+EffDess
+PleinÉcr
+
+"INIT.DispGraph
+AxesNAff
+CoordNAff
+GraphNAff 
+FoncNAff 
+EffDess
+
+L₅(Q→Xmin
+L₅(Q+1→Xmax
+L₅(Q+2→Ymin
+L₅(Q+3→Ymax
+DispGraph
+
+"CADRE
+L₅(Q+4→θ
+L₅(Q+6→Z
+L₅(Q+8→Y
+L₅(Q+10→X
+θ+arrondir(Xmax/L₅(Q+5),0→G
+Z+arrondir(Ymin/L₅(Q+7),0→H
+Y+arrondir(Xmax/L₅(Q+9),0→D
+X+arrondir(Ymin/L₅(Q+11),0→B
+Ligne(G,H,D,H,NOIR
+Ligne(G,B,D,B,NOIR
+Ligne(G,H,G,B,NOIR
+Ligne(D,H,D,B,NOIR
+G-θ→G
+H-Z→H
+B-Y→B
+D-X→D
+
+"INIT. SNAKE
+D-G→θ
+abs(B-H→W
+{θ,W→dim([A]
+Remplir(0,[A]
+For(I,1,2
+1→[A](I,1
+Pt-Aff(I+G-1,H,2,ROUGE
+End
+"LONG. SNAKE
+3→V
+"COORD BUFF (X+Y=HEAD(-1),Z+R=TAIL,K+L=HEAD)
+2→X
+1→Y
+1→Z
+Y→R
+3→K
+1→L
+
+"OPTI PRECALC
+G-1→I
+H+1→J
+
+"INIT FRUIT
+nbrAléatEnt(K+1,θ→M
+nbrAléatEnt(L+1,W→N
+­1→[A](M,N
+Pt-Aff(M+I,J-N,3,VERT
+1→T
+1→S
+
+"VIT.JEU
+L₅(Q+12→U
+
+"LOOP JEU:
+"AFFICHE N.HEAD
+"T=[A](X,Y..->
+"L=Y
+"DIR+VERIF EXIT+N.COORD
+"GETKEY..->
+"Y+(T=..)=L
+"VERIF MUR+AUTOTOUCHE
+"S-(θ..=S->
+"S-(A..=S
+"RETIRE TAIL
+"If (..)Pt-Aff(BLANC..->
+"R+..=R
+"N.FRUIT
+"Pt-NAff(M,N..->
+"-1=[A](M,N
+While S=1
+T→[A](X,Y
+Pt-Aff(I+K,J-L,2,ROUGE
+K→X
+L→Y
+getKey→A
+Wait U
+If A≠0:Then:S+3(A=105→S
+⌊DIR(A→A
+A(2≠abs(A-T
+Rep+Tnon(Rep→T
+End
+X+(T=1)-(T=3→K
+Y+(T=2)-(T=4→L
+S-(K≤0)-(K>θ)-(L>W)-(L≤0→S
+If S=1:Then:[A](K,L)→A
+S-(A>0)+(Z=K et R=L→S
+If A>­1:Then:Pt-Aff(Z+I,J-R,2,BLANC
+[A](Z,R→A
+0→[A](Z,R
+Z+(A=1)-(A=3→Z
+R+(A=2)-(A=4→R
+Else:Pt-NAff(I+M,J-N
+5→[A](X,Y
+While [A](M,N)≠0
+nbrAléatEnt(1,θ→M
+nbrAléatEnt(1,W→N
+End
+V+1→V
+Pt-Aff(I+M,J-N,3,VERT
+­1→[A](M,N
+End
+End
+End
+Q+13→A
+V>L₅(A→B
+VB+L₅(A)non(B→L₅(A
+If B:Then:CouleurTexte(JAUNE
+Texte(­1,30,80,"NEW PB : "+versChaîne(V
+Else:" (PB:"+versChaîne(L₅(A))+")→Chn1
+If S<1:Then:CouleurTexte(ROUGE
+Texte(­1,30,35,"PERDU... "+versChaîne(V)+Chn1
+Else:CouleurTexte(BLEU
+Texte(­1,30,35,"ABANDON : "+versChaîne(V)+Chn1
+End
+End
+Pause 
+
+Goto A
